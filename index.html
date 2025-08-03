@@ -9,12 +9,32 @@
 <body>
     <div class="container">
      <h1>Add Your Text Here</h1>
-     <input type="text" id="textInput" placeholder="Type something...">
-    <button id="submitButton">Submit</button>
+     <input type="text" id="qrText" placeholder="Type something...">
+     <div id="imgBox">
+        <img src="" id="qrImage" alt="">
+     </div>
+    <button onclick="generateQR()" id="submitButton">generate QR Code</button>
     </div>
 
     <script>
+        let imgBox = document.getElementById("imgBox");
+        let qrImage = document.getElementById("qrImage");
+        let qrText = document.getElementById("qrText");
 
+         function generateQR(){
+            if(qrText.value.length > 0){
+                qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qrText.value;
+                imgBox.classList.add("show-img");
+            }
+            else {
+                qrText.classList.add("error");
+                setTimeout(() => {
+                    qrText.classList.remove("error");
+                }, 1000);
+            }
+
+            
+         }
     </script>
 </body>
 </html>
